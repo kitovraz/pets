@@ -1,6 +1,5 @@
 package ru.elmanov.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,9 +7,9 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.apache.commons.lang3.builder.EqualsExclude;
 import org.apache.commons.lang3.builder.HashCodeExclude;
-import org.apache.commons.lang3.builder.ToStringExclude;
 import org.hibernate.envers.AuditTable;
 import org.hibernate.envers.Audited;
+import org.hibernate.envers.NotAudited;
 
 import javax.persistence.*;
 
@@ -21,7 +20,6 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Audited( withModifiedFlag = true )
-@ToString(exclude = {"supportProgram"})
 public class Resource extends BaseEntity{
 
     @Column(name = "title")
@@ -30,8 +28,6 @@ public class Resource extends BaseEntity{
     @JsonManagedReference(value = "resource-support_programs")
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "support_program_id")
-    @HashCodeExclude
-    @EqualsExclude
     private SupportProgram supportProgram;
     @Column(name = "support_program_id", insertable = false, updatable = false)
     private Long supportProgramId;

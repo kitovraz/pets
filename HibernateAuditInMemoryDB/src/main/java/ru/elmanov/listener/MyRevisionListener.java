@@ -10,7 +10,6 @@ public class MyRevisionListener implements RevisionListener {
     @Override
     public void newRevision(Object revisionEntity) {
         Revision revision = (Revision) revisionEntity;
-        log.info("user: {}", revision.getUser());
         revision.setUser(getUser());
     }
 

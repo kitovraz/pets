@@ -1,12 +1,16 @@
 package ru.elmanov;
 
 import lombok.extern.slf4j.Slf4j;
+import org.dom4j.rule.Mode;
 import org.hibernate.envers.AuditReader;
 import org.hibernate.envers.AuditReaderFactory;
+import org.modelmapper.ModelMapper;
+import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 import ru.elmanov.model.Resource;
 import ru.elmanov.model.SupportProgram;
 import ru.elmanov.model.User;
@@ -21,6 +25,13 @@ import java.util.Optional;
 @SpringBootApplication
 @Slf4j
 public class HibernateAuditInMemoryDbApplication implements CommandLineRunner {
+
+    @Bean
+    public ModelMapper modelMapper(){
+        ModelMapper modelMapper = new ModelMapper();
+        modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+        return modelMapper;
+    }
 
     public static void main(String[] args) {
         SpringApplication.run(HibernateAuditInMemoryDbApplication.class, args);
