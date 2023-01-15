@@ -1,0 +1,28 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: eclient
+  cloud:
+    config:
+      url: http://localhost:8888
+      import: optional:configserver
+      #don't check git repo. Useful by using with local properties.
+      import-check:
+        enabled: false
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:9000/eureka
+  instance:
+    prefer-ip-address: true
+
+micro:
+  text: I'm first micro (1)
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh

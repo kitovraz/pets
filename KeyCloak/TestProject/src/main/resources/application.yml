@@ -1,0 +1,9 @@
+server:
+  port: 9090
+
+keycloak:
+  resource: spring-keycloack-demo-client
+  auth-server-url: http://localhost:8080/
+  realm: spring-keycloack-demo-realm
+  public-client: true
+  bearer-only: true

@@ -1,0 +1,15 @@
+server:
+  port: 8082
+spring:
+  application:
+    name: eclient-2
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:9000/eureka
+  instance:
+    prefer-ip-address: true
+
+micro:
+  text: I'm second micro (2)
