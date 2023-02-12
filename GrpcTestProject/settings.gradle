@@ -1,0 +1,4 @@
+rootProject.name = 'GrpcTestProject'
+include 'grpc-clinet'
+include 'grpc-server'
+

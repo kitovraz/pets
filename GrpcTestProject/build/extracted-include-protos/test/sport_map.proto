@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "ru.elmanov.grpc.sport";
+option java_outer_classname = "SportMapProto";
+option objc_class_prefix = "SPP";
+
+message Person{
+  int64 person_id = 1;
+  repeated int64 sport_ids = 2;
+}
+
+message Sport{
+  int64 sport_id = 1;
+  string name = 2;
+}
+
+service SportMap{
+  rpc getSport(stream Person) returns (stream Sport) {}
+}

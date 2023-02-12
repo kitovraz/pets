@@ -1,0 +1,15 @@
+plugins {
+    id 'java'
+    id 'idea'
+}
+
+group 'ru.elmanov.grpc'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+test {
+    useJUnitPlatform()
+}

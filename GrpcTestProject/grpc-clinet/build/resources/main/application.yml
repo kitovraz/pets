@@ -1,0 +1,14 @@
+server:
+  port: 8001
+grpc:
+  client:
+    sport-map-service-sync:
+      address: static://localhost:9000
+      negotiation-type: plaintext
+    sport-map-service-async:
+      address: static://localhost:9000
+      negotiation-type: plaintext
+#spring:
+#  jackson:
+#    serialization:
+#      FAIL_ON_EMPTY_BEANS: false
