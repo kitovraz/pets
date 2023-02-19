@@ -1,0 +1,54 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'idea'
+}
+
+group 'ru.elmanov.kafka.consumer'
+version '1.0-SNAPSHOT'
+
+application {
+    mainClass.set('ru.elmanov.kafka.consumer.KafkaConsumerApplication')
+}
+
+//application {
+//    mainClass = 'ru.elmanov.kafka.consumer.KafkaConsumerApplication'
+//}
+
+jar {
+    manifest {
+        attributes('Main-Class': 'ru.elmanov.kafka.consumer.KafkaConsumerApplication')
+    }
+}
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+sourceCompatibility = 11
+targetCompatibility = 11
+
+def lombokVersion = '1.18.26'
+def springBootVersion = '2.7.5'
+def springKafkaVersion = '2.8.0'
+def jacksonDatabindVersion = '2.10.0'
+
+dependencies {
+    implementation "org.springframework.boot:spring-boot-starter-web:${springBootVersion}"
+//    implementation "org.springframework.boot:spring-boot-starter:${springBootVersion}"
+    compileOnly "org.projectlombok:lombok:${lombokVersion}"
+    compileOnly "org.apache.tomcat:annotations-api:6.0.53"
+    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+    testCompileOnly "org.projectlombok:lombok:${lombokVersion}"
+    implementation group: 'org.apache.commons', name: 'commons-collections4', version: '4.4'
+    implementation "org.springframework.kafka:spring-kafka:${springKafkaVersion}"
+    implementation "com.fasterxml.jackson.core:jackson-databind:${jacksonDatabindVersion}"
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+}
+
+test {
+    useJUnitPlatform()
+}
