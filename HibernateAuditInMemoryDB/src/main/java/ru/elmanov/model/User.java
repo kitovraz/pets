@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 import org.hibernate.envers.AuditTable;
 import org.hibernate.envers.Audited;
-import ru.elmanov.model.audit.Revision;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

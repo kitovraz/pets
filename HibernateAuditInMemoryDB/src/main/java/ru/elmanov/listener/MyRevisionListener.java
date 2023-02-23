@@ -2,8 +2,8 @@ package ru.elmanov.listener;
 
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.envers.RevisionListener;
-import ru.elmanov.model.User;
 import ru.elmanov.model.audit.Revision;
+import ru.elmanov.model.User;
 
 @Slf4j
 public class MyRevisionListener implements RevisionListener {

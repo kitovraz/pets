@@ -2,8 +2,6 @@ package ru.elmanov.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
-import org.apache.commons.lang3.builder.EqualsExclude;
-import org.apache.commons.lang3.builder.HashCodeExclude;
 import org.hibernate.envers.AuditTable;
 import org.hibernate.envers.Audited;
 

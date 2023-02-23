@@ -1,9 +1,6 @@
 package ru.elmanov;
 
 import lombok.extern.slf4j.Slf4j;
-import org.dom4j.rule.Mode;
-import org.hibernate.envers.AuditReader;
-import org.hibernate.envers.AuditReaderFactory;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +15,6 @@ import ru.elmanov.repository.ResourceRepository;
 import ru.elmanov.repository.SupportProgramRepository;
 
 import javax.persistence.EntityManager;
-import java.sql.Date;
-import java.time.LocalDate;
 import java.util.Optional;
 
 @SpringBootApplication
