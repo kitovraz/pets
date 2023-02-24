@@ -1,7 +1,6 @@
 package ru.elmanov.secondary.table.audit.model;
 
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -11,9 +10,10 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @MappedSuperclass
-@SuperBuilder
+//@SuperBuilder
 @NoArgsConstructor
 @EqualsAndHashCode
+@Getter
 public class BaseModel implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -25,11 +25,11 @@ public class BaseModel implements Serializable {
 
     @Column(name = "create_at")
     @CreationTimestamp
-//    @Setter(AccessLevel.NONE)
+    @Setter(AccessLevel.NONE)
     private LocalDateTime createAt;
 
     @Column(name = "update_at")
     @UpdateTimestamp
-//    @Setter(AccessLevel.NONE)
+    @Setter(AccessLevel.NONE)
     private LocalDateTime updateAt;
 }
