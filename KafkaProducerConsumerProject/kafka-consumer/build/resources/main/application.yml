@@ -4,4 +4,21 @@ spring:
   kafka:
     bootstrap-servers: localhost:9092
     topic: test.manual
+    topic-entity: topic-entity
     consumer-group: my_consumer_group
+    consumer:
+      properties:
+        spring:
+          json:
+            trusted:
+              packages: ru.elmanov.kafka.consumer.model
+#    consumer:
+#      key-deserializer: org.springframework.kafka.support.serializer.StringDeserializer
+#      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+#    consumer:
+#      properties:
+#        spring.json.trusted.packages: [java.util, java.lang, ru.elmanov.kafka.consumer.model, ru.elmanov.kafka.consumer.model.MessageInfo]
+
+#  jackson:
+#    serialization:
+#      FAIL_ON_EMPTY_BEANS: false

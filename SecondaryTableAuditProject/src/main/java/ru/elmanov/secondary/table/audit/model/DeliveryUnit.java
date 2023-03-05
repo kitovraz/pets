@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.apache.commons.collections4.CollectionUtils;
 import ru.elmanov.secondary.table.audit.model.listener.DeliveryUnitAudListener;
 import ru.elmanov.secondary.table.audit.model.states.DeliveryUnitState;
 

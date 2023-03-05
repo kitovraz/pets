@@ -21,7 +21,7 @@ targetCompatibility = 11
 def lombokVersion = '1.18.24'
 def springBootVersion = '2.7.5'
 def springKafkaVersion = '2.8.0'
-def jacksonDatabindVersion = '2.10.0'
+def jacksonDatabindVersion = '2.9.7'
 
 dependencies {
 //    implementation "org.springframework.boot:spring-boot-starter:${springBootVersion}"
@@ -34,6 +34,7 @@ dependencies {
     implementation group: 'org.apache.commons', name: 'commons-collections4', version: '4.4'
     implementation "org.springframework.kafka:spring-kafka:${springKafkaVersion}"
     implementation "com.fasterxml.jackson.core:jackson-databind:${jacksonDatabindVersion}"
+    implementation 'javax.validation:validation-api:2.0.1.Final'
 
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
