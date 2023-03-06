@@ -62,7 +62,8 @@ public class KafkaService {
             @Override
             public void onSuccess(SendResult<String, MessageInfo> result) {
                 log.info("Sent message=[" + result.getProducerRecord().value() +
-                        "] with offset=[" + result.getRecordMetadata().offset() + "]");
+                        "] with offset=[" + result.getRecordMetadata().offset() + "]" +
+                        " topic: " + result.getProducerRecord().topic());
             }
         });
     }

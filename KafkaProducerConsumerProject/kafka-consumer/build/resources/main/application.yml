@@ -12,13 +12,18 @@ spring:
           json:
             trusted:
               packages: ru.elmanov.kafka.consumer.model
+    ssl:
+      enabled: false
+      protocol: SSL
+#      trust-store-location: classpath:CERTS/clinet.truststore.jks
+#      trust-store-password: 123456
+#      key-store-location: classpath:CERTS/server.keystore.p12
+#      key-store-type: PKCS12
+#      key-store-password: 123456
+#      key-password: 123456
 #    consumer:
 #      key-deserializer: org.springframework.kafka.support.serializer.StringDeserializer
 #      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
-#    consumer:
-#      properties:
-#        spring.json.trusted.packages: [java.util, java.lang, ru.elmanov.kafka.consumer.model, ru.elmanov.kafka.consumer.model.MessageInfo]
-
 #  jackson:
 #    serialization:
 #      FAIL_ON_EMPTY_BEANS: false
