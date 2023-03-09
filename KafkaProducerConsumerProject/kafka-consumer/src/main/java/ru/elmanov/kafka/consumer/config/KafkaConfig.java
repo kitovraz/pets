@@ -1,5 +1,6 @@
 package ru.elmanov.kafka.consumer.config;
 
+import org.apache.kafka.clients.CommonClientConfigs;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.config.SslConfigs;
@@ -36,26 +37,29 @@ public class KafkaConfig {
 
     @Bean
     public Map<String, Object> consumerConfigs() {
-        Map<String, Object> map = new HashMap<>();
-        map.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapAddress);
-        map.put(ConsumerConfig.GROUP_ID_CONFIG, consumerGroup);
-        map.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
-        map.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
-        map.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
+        Map<String, Object> properties = new HashMap<>();
+        properties.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapAddress);
+        properties.put(ConsumerConfig.GROUP_ID_CONFIG, consumerGroup);
+        properties.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+        properties.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
+        properties.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
 
         if (sslEnabled) {
-            map.put(SslConfigs.SSL_PROTOCOL_CONFIG, "SSL");
-            map.put(SslConfigs.SSL_TRUSTSTORE_LOCATION_CONFIG, "CERTS/clinet.truststore.jks");
-            map.put(SslConfigs.SSL_TRUSTSTORE_PASSWORD_CONFIG, "123456");
-            map.put(SslConfigs.SSL_TRUSTSTORE_TYPE_CONFIG, "JKS");
+            properties.put(CommonClientConfigs.SECURITY_PROTOCOL_CONFIG, "SSL");
+            properties.put(SslConfigs.SSL_PROTOCOL_CONFIG, "TLSv1.2");
+            properties.put(SslConfigs.SSL_TRUSTSTORE_LOCATION_CONFIG, "CERTS/clinet.truststore.jks");
+            properties.put(SslConfigs.SSL_TRUSTSTORE_PASSWORD_CONFIG, "123456");
+            properties.put(SslConfigs.SSL_TRUSTSTORE_TYPE_CONFIG, "JKS");
 
-            map.put(SslConfigs.SSL_KEY_PASSWORD_CONFIG, "123456");
-            map.put(SslConfigs.SSL_KEYSTORE_LOCATION_CONFIG, "CERTS/server.keystore.p12");
-            map.put(SslConfigs.SSL_KEYSTORE_PASSWORD_CONFIG, "123456");
-            map.put(SslConfigs.SSL_KEYSTORE_TYPE_CONFIG, "PKCS12");
+//            properties.put(SslConfigs.SSL_KEY_PASSWORD_CONFIG, "123456");
+            properties.put(SslConfigs.SSL_KEYSTORE_LOCATION_CONFIG, "CERTS/server.keystore.p12");
+            properties.put(SslConfigs.SSL_KEYSTORE_PASSWORD_CONFIG, "123");
+            properties.put(SslConfigs.SSL_KEYSTORE_TYPE_CONFIG, "PKCS12");
+
+            properties.put(SslConfigs.SSL_ENDPOINT_IDENTIFICATION_ALGORITHM_CONFIG, "");
         }
 
-        return map;
+        return properties;
     }
 
     @Bean
@@ -78,13 +82,13 @@ public class KafkaConfig {
         return factory;
     }
 
-    @Bean
-    public NewTopic entityTopic(){
-        return TopicBuilder.name(topicEntity)
-                .replicas(1)
-                .partitions(1)
-                .build();
-    }
+//    @Bean
+//    public NewTopic entityTopic(){
+//        return TopicBuilder.name(topicEntity)
+//                .replicas(1)
+//                .partitions(1)
+//                .build();
+//    }
 
 //    @Bean
 //    public RecordMessageConverter recordMessageConverter(){

@@ -2,7 +2,7 @@ server:
   port: 8001
 spring:
   kafka:
-    bootstrap-servers: localhost:9092
+    bootstrap-servers: localhost:9093,localhost:9092
     topic: test.manual
     topic-entity: topic-entity
     producer:
@@ -12,6 +12,22 @@ spring:
             add:
               type:
                 headers: false
+    ssl:
+      enabled: true
+#      protocol: TLSv1.2
+#      truststore:
+#        location: classpath:CERTS\clinet.truststore.jks
+#        password: 123456
+#        type: JKS
+#      keystore:
+#        location: classpath:CERTS\server.keystore.p12
+#        password: 123456
+#        type: PKCS12
+#      endpoint:
+#        identification:
+#          algorithm:
+#    security:
+#      protocol: SSL
   jackson:
     serialization:
       FAIL_ON_EMPTY_BEANS: false
