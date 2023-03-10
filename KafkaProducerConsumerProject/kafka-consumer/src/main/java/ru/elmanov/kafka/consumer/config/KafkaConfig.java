@@ -1,21 +1,25 @@
 package ru.elmanov.kafka.consumer.config;
 
+import lombok.SneakyThrows;
 import org.apache.kafka.clients.CommonClientConfigs;
-import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.config.SslConfigs;
+import org.apache.kafka.common.config.internals.BrokerSecurityConfigs;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.kafka.annotation.EnableKafka;
 import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
-import org.springframework.kafka.config.TopicBuilder;
 import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import org.springframework.kafka.support.serializer.JsonDeserializer;
+import org.springframework.util.ResourceUtils;
 import ru.elmanov.kafka.consumer.model.MessageInfo;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -35,6 +39,7 @@ public class KafkaConfig {
     @Value("${spring.kafka.topic-entity}")
     private String topicEntity;
 
+    @SneakyThrows
     @Bean
     public Map<String, Object> consumerConfigs() {
         Map<String, Object> properties = new HashMap<>();
@@ -47,19 +52,25 @@ public class KafkaConfig {
         if (sslEnabled) {
             properties.put(CommonClientConfigs.SECURITY_PROTOCOL_CONFIG, "SSL");
             properties.put(SslConfigs.SSL_PROTOCOL_CONFIG, "TLSv1.2");
-            properties.put(SslConfigs.SSL_TRUSTSTORE_LOCATION_CONFIG, "CERTS/clinet.truststore.jks");
+            properties.put(SslConfigs.SSL_TRUSTSTORE_LOCATION_CONFIG, "C:\\Users\\elman\\IdeaProjects\\pets\\KafkaProducerConsumerProject\\kafka-consumer\\src\\main\\resources\\ssl_folder\\client.keystore.p12");
             properties.put(SslConfigs.SSL_TRUSTSTORE_PASSWORD_CONFIG, "123456");
             properties.put(SslConfigs.SSL_TRUSTSTORE_TYPE_CONFIG, "JKS");
 
 //            properties.put(SslConfigs.SSL_KEY_PASSWORD_CONFIG, "123456");
-            properties.put(SslConfigs.SSL_KEYSTORE_LOCATION_CONFIG, "CERTS/server.keystore.p12");
-            properties.put(SslConfigs.SSL_KEYSTORE_PASSWORD_CONFIG, "123");
+            properties.put(SslConfigs.SSL_KEYSTORE_LOCATION_CONFIG, "C:\\Users\\elman\\IdeaProjects\\pets\\KafkaProducerConsumerProject\\kafka-consumer\\src\\main\\resources\\ssl_folder\\clinet.truststore.jks");
+            properties.put(SslConfigs.SSL_KEYSTORE_PASSWORD_CONFIG, "123456");
             properties.put(SslConfigs.SSL_KEYSTORE_TYPE_CONFIG, "PKCS12");
 
             properties.put(SslConfigs.SSL_ENDPOINT_IDENTIFICATION_ALGORITHM_CONFIG, "");
+            properties.put(BrokerSecurityConfigs.SSL_CLIENT_AUTH_CONFIG, "true");
         }
 
         return properties;
+    }
+
+    public static void main(String[] args) throws IOException {
+        File file = new ClassPathResource("ssl_folder/client.keystore.p12").getFile();
+        System.out.println(file.getAbsoluteFile());
     }
 
     @Bean

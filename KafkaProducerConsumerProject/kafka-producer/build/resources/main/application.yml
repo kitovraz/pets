@@ -2,7 +2,8 @@ server:
   port: 8001
 spring:
   kafka:
-    bootstrap-servers: localhost:9093,localhost:9092
+    bootstrap-servers: localhost:9093
+#    ,localhost:9092
     topic: test.manual
     topic-entity: topic-entity
     producer:
