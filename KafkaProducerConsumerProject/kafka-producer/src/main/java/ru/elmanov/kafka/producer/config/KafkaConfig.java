@@ -1,6 +1,7 @@
 package ru.elmanov.kafka.producer.config;
 
 import lombok.SneakyThrows;
+import org.apache.kafka.clients.CommonClientConfigs;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.config.SslConfigs;
 import org.apache.kafka.common.config.internals.BrokerSecurityConfigs;
@@ -50,15 +51,16 @@ public class KafkaConfig {
         properties.put(JsonSerializer.ADD_TYPE_INFO_HEADERS, "false");
 
         if (sslEnabled) {
-            properties.put(SslConfigs.SSL_PROTOCOL_CONFIG, "SSL");
-            properties.put(SslConfigs.SSL_TRUSTSTORE_LOCATION_CONFIG, "C:\\Users\\elman\\IdeaProjects\\pets\\KafkaProducerConsumerProject\\kafka-consumer\\src\\main\\resources\\ssl_folder\\client.keystore.p12");
+            properties.put(CommonClientConfigs.SECURITY_PROTOCOL_CONFIG, "SSL");
+            properties.put(SslConfigs.SSL_PROTOCOL_CONFIG, "TLSv1.2");
+            properties.put(SslConfigs.SSL_TRUSTSTORE_LOCATION_CONFIG, "C:\\Users\\elman\\IdeaProjects\\pets\\KafkaProducerConsumerProject\\kafka-producer\\src\\main\\resources\\ssl\\kafka.client.keystore.jks");
             properties.put(SslConfigs.SSL_TRUSTSTORE_PASSWORD_CONFIG, "123456");
             properties.put(SslConfigs.SSL_TRUSTSTORE_TYPE_CONFIG, "JKS");
 
-            properties.put(SslConfigs.SSL_KEY_PASSWORD_CONFIG, "123456");
-            properties.put(SslConfigs.SSL_KEYSTORE_LOCATION_CONFIG, "C:\\Users\\elman\\IdeaProjects\\pets\\KafkaProducerConsumerProject\\kafka-consumer\\src\\main\\resources\\ssl_folder\\clinet.truststore.jks");
+//            properties.put(SslConfigs.SSL_KEY_PASSWORD_CONFIG, "123456");
+            properties.put(SslConfigs.SSL_KEYSTORE_LOCATION_CONFIG, "C:\\Users\\elman\\IdeaProjects\\pets\\KafkaProducerConsumerProject\\kafka-producer\\src\\main\\resources\\ssl\\kafka.client.truststore.jks");
             properties.put(SslConfigs.SSL_KEYSTORE_PASSWORD_CONFIG, "123456");
-            properties.put(SslConfigs.SSL_KEYSTORE_TYPE_CONFIG, "PKCS12");
+            properties.put(SslConfigs.SSL_KEYSTORE_TYPE_CONFIG, "JKS");
 
             properties.put(SslConfigs.SSL_ENDPOINT_IDENTIFICATION_ALGORITHM_CONFIG, "");
             properties.put(BrokerSecurityConfigs.SSL_CLIENT_AUTH_CONFIG, "true");

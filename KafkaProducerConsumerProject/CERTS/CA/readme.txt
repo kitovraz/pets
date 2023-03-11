@@ -1,0 +1,1 @@
+https://github.com/jinternals/kafka_ssl_setup/tree/master/Part%202

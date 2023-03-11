@@ -35,6 +35,3 @@ Email Address []:email@address.ru
 
 3.keytool -import -alias clientname -file client-domain.pem -keystore server.truststore.jks
 [password: 123456]
-
-(Full trustores)
-1. 
