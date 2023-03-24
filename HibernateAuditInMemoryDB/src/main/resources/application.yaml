@@ -31,3 +31,10 @@ spring:
       settings:
         web-allow-others: false
 
+#env variables: SCHEMA_DB=public_maxn;SCHEMA_DB_LOCAL=public
+dev:
+  work:
+    schema: public_maxn
+my:
+  database:
+    schema: ${SCHEMA_DB_LOCAL:public}

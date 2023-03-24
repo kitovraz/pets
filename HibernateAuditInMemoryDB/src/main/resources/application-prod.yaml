@@ -1,0 +1,3 @@
+my:
+  database:
+    schema: ${SCHEMA_DB:public}
