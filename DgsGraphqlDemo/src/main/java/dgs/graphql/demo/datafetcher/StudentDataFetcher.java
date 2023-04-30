@@ -14,10 +14,11 @@ import java.util.stream.Collectors;
 public class StudentDataFetcher {
 
     @DgsQuery
-    public List<Student> getStudents(Integer groupId) {
+    public List<Student> getStudents(Long groupId) {
+        System.out.println("getStudents");
         return FakeDatabase.STUDENTS.stream()
                 .filter(student -> Objects.nonNull(student.getGroup()))
-                .filter(student -> student.getGroup().getId().equals(String.valueOf(groupId)))
+                .filter(student -> student.getGroup().getId() == groupId)
                 .collect(Collectors.toList());
     }
 }

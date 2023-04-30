@@ -1,4 +1,14 @@
+server:
+  port: 8000
 spring:
   graphql:
     graphiql:
       enabled: true
+#dgs:
+#  graphql:
+#    extensions:
+#      scalars:
+#        numbers:
+#          enabled: true
+#        time-dates:
+#          enabled: true

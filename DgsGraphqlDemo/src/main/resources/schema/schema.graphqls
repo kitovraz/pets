@@ -1,16 +1,18 @@
+scalar Long
+
 type Query {
-    getStudents(groupId: Int): [Student]
+    getStudents(groupId: Long!): [Student]
     getGroups: [Group]
 }
 
 type Student {
-    id: ID!
+    id: Long!
     name: String!
     group: Group!
 }
 
 type Group {
-    id: ID!
+    id: Long!
     number: Int
     students: [Student!]!
 }

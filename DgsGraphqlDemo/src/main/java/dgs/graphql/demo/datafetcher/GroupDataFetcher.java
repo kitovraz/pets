@@ -12,6 +12,7 @@ public class GroupDataFetcher {
 
     @DgsQuery
     public List<Group> getGroups() {
+        System.out.println("getGroups");
         return FakeDatabase.GROUPS;
     }
 }
