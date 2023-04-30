@@ -1,0 +1,16 @@
+type Query {
+    getStudents(groupId: Int): [Student]
+    getGroups: [Group]
+}
+
+type Student {
+    id: ID!
+    name: String!
+    group: Group!
+}
+
+type Group {
+    id: ID!
+    number: Int
+    students: [Student!]!
+}

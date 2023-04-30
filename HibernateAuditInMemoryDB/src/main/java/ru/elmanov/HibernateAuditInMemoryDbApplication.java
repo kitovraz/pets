@@ -15,6 +15,7 @@ import ru.elmanov.repository.ResourceRepository;
 import ru.elmanov.repository.SupportProgramRepository;
 
 import javax.persistence.EntityManager;
+import java.util.List;
 import java.util.Optional;
 
 @SpringBootApplication
@@ -22,13 +23,30 @@ import java.util.Optional;
 public class HibernateAuditInMemoryDbApplication implements CommandLineRunner {
 
     @Bean
-    public ModelMapper modelMapper(){
+    public ModelMapper modelMapper() {
         ModelMapper modelMapper = new ModelMapper();
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
         return modelMapper;
     }
 
     public static void main(String[] args) {
+        List<String> list = List.of("A", "Б", "В");
+        System.out.println(
+                list.stream()
+                        .reduce("->",
+                                (first, second) -> first + "$" + second,
+                                (first, second) -> first + "%" + second
+                        )
+        );
+        System.out.println(
+                list.parallelStream()
+                        .reduce("->",
+                                (first, second) -> first + "$" + second,
+                                (first, second) -> first + "%" + second
+                        )
+        );
+
+
         SpringApplication.run(HibernateAuditInMemoryDbApplication.class, args);
     }
 
