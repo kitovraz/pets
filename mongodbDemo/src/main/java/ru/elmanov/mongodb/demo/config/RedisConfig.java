@@ -14,18 +14,15 @@ import ru.elmanov.mongodb.demo.model.User;
 public class RedisConfig {
 
     @Bean
-    public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory factory) {
-        var om = new ObjectMapper();
-        om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
-        // redis serialize
-        var jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer(om, Object.class);
+    public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory factory, ObjectMapper objectMapper) {
+//        var jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer(objectMapper, Object.class);
         var template = new RedisTemplate<String, Object>();
         template.setConnectionFactory(factory);
-        template.setKeySerializer(jackson2JsonRedisSerializer);
-        template.setValueSerializer(jackson2JsonRedisSerializer);
-        template.setHashKeySerializer(jackson2JsonRedisSerializer);
-        template.setHashValueSerializer(jackson2JsonRedisSerializer);
-        template.afterPropertiesSet();
+//        template.setKeySerializer(jackson2JsonRedisSerializer);
+//        template.setValueSerializer(jackson2JsonRedisSerializer);
+//        template.setHashKeySerializer(jackson2JsonRedisSerializer);
+//        template.setHashValueSerializer(jackson2JsonRedisSerializer);
+//        template.afterPropertiesSet();
         return template;
     }
 }

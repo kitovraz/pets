@@ -28,7 +28,10 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-cache:3.0.4'
 	implementation 'org.springframework.boot:spring-boot-starter-data-redis:3.0.4'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
-	implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.0'
+	implementation 'com.fasterxml.jackson.core:jackson-databind:2.14.2'
+	implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.14.2'
+	implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.14.2'
+	implementation 'com.fasterxml.jackson.module:jackson-module-parameter-names:2.14.2'
 	implementation 'redis.clients:jedis:4.3.1'
 }
 

@@ -1,5 +1,9 @@
 package ru.elmanov.mongodb.demo.repository.redis;
 
+import com.fasterxml.jackson.databind.json.JsonMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import io.micrometer.common.util.StringUtils;
+import io.netty.util.internal.StringUtil;
 import jakarta.annotation.PostConstruct;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
@@ -9,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import ru.elmanov.mongodb.demo.model.User;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Repository
@@ -36,36 +41,29 @@ public class UserRedisRepository implements RedisRepository<User> {
 
     @Override
     public void add(User user) {
-        opsForHash.put(REDIS_KEY, user.getId(), user);
+        if (Objects.nonNull(user)) {
+            opsForHash.put(REDIS_KEY, user.getId(), user);
+        }
     }
 
     @Override
     public void delete(String id) {
-        opsForHash.delete(id);
+        if (StringUtils.isNotBlank(id)) {
+            opsForHash.delete(id);
+        }
+
+        JsonMapper.builder()
+                .addModule(new JavaTimeModule())
+                .build();
     }
 
     @Override
     public User find(String id) {
-        return (User) opsForHash.get(REDIS_KEY, id);
+        if (StringUtils.isNotBlank(id)) {
+            return (User) opsForHash.get(REDIS_KEY, id);
+        }
+
+        return null;
     }
 
-//    public static void main(String[] args) {
-//        JedisPool pool = new JedisPool("localhost", 6379, "default", "redis-password");
-//
-//        try (Jedis jedis = pool.getResource()) {
-//            // Store & Retrieve a simple string
-//            jedis.set("foo", "bar");
-//            System.err.println(jedis.get("foo")); // prints bar
-
-            // Store & Retrieve a HashMap
-//            Map<String, String> hash = new HashMap<>();;
-//            hash.put("name", "John");
-//            hash.put("surname", "Smith");
-//            hash.put("company", "Redis");
-//            hash.put("age", "29");
-//            jedis.hset("user-session:123", hash);
-//            System.out.println(jedis.hgetAll("user-session:123"));
-//            // Prints: {name=John, surname=Smith, company=Redis, age=29}
-//        }
-//    }
 }

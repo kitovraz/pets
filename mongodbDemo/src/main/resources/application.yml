@@ -14,8 +14,10 @@ spring:
   jackson:
     serialization:
       FAIL_ON_EMPTY_BEANS: false
+    deserialization:
+      READ_UNKNOWN_ENUM_VALUES_USING_DEFAULT_VALUE: true
+#      READ_UNKNOWN_ENUM_VALUES_AS_NULL: true
   redis:
-#    uri: redis://redispass@redis.dev.com
     host: localhost
     port: 6379
     database: 0

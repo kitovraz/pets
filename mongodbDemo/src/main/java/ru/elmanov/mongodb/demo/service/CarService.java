@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import ru.elmanov.mongodb.demo.model.Car;
 import ru.elmanov.mongodb.demo.repository.CarRepository;
 
+import java.util.Objects;
+
 @Service
 @Slf4j
 @RequiredArgsConstructor
@@ -16,9 +18,10 @@ public class CarService {
 
     public Car createCar(Car car) {
         if (Boolean.TRUE.equals(carRepository.exists(Example.of(car)))) {
-            var mess = "car exists with id: %s".formatted(car.getId());
+            var mess = "car exists with code: %s".formatted(car.getCode());
             log.warn(mess);
-            return null;
+
+            return Objects.nonNull(car.getCode()) ? carRepository.findByCode(car.getCode()) : null;
         }
         return carRepository.insert(car);
     }

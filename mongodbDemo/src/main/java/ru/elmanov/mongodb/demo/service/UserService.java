@@ -14,41 +14,41 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class UserService {
 
-    private final UserRepository repo;
+    private final UserRepository userRepository;
     private final CarService carService;
 
     public List<User> getAllUsers() {
-        return repo.findAll();
+        return userRepository.findAll();
     }
 
     public User get(String id) {
-        return repo.findById(id).orElseThrow(RuntimeException::new);
+        return userRepository.findById(id).orElseThrow(RuntimeException::new);
     }
 
     public User createUser(User user) {
-        if (Boolean.TRUE.equals(repo.existsByEmail(user.getEmail()))) {
+        if (Boolean.TRUE.equals(userRepository.existsByEmail(user.getEmail()))) {
             var mess = "user exists with %s".formatted(user.getEmail());
             log.warn(mess);
-            return null;
+            return Objects.nonNull(user.getId()) ? userRepository.findById(user.getId()).orElse(null) : null;
         }
 
-//        if (Objects.nonNull(user.getCar())) {
-//            var car = carService.createCar(user.getCar());
-//            user.setCar(car);
-//        }
+        if (Objects.nonNull(user.getCar())) {
+            var car = carService.createCar(user.getCar());
+            user.setCar(car);
+        }
 
-        return repo.insert(user);
+        return userRepository.insert(user);
     }
 
     public Integer deleteUser(String id) {
-        if (repo.existsById(id)) {
-            repo.deleteById(id);
+        if (userRepository.existsById(id)) {
+            userRepository.deleteById(id);
             return 1;
         }
         return 0;
     }
 
     public User updateUser(User user) {
-        return repo.save(user);
+        return userRepository.save(user);
     }
 }
