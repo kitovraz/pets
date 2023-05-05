@@ -1,0 +1,34 @@
+server:
+  port: 8000
+
+spring:
+  data:
+    mongodb:
+      authentication-database: admin
+      username: devroot
+      password: devroot
+      database: testdb
+      port: 27017
+      host: localhost
+      auto-index-creation: true
+  jackson:
+    serialization:
+      FAIL_ON_EMPTY_BEANS: false
+  redis:
+#    uri: redis://redispass@redis.dev.com
+    host: localhost
+    port: 6379
+    database: 0
+#    username: default
+#    password: redis-password
+    timeout: 60000
+    io-thread-pool-size: 10
+    computation-thread-pool-size: 10
+    cache:
+      expiration-after-write-policy: 1h
+    pool:
+      enabled: true
+      min-idle: 5
+      max-total: 15
+      max-idle: 10
+
