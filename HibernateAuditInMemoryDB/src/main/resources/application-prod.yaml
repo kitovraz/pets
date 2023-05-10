@@ -1,3 +1,7 @@
 my:
   database:
     schema: ${SCHEMA_DB:public}
+spring:
+  devtools:
+    restart:
+      pool-interval: 2s
