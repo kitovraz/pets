@@ -1,4 +1,4 @@
-package ru.elmanov.jwt.security.demo.dto;
+package ru.elmanov.jwt.security.demo.dto.response;
 
 import lombok.Data;
 

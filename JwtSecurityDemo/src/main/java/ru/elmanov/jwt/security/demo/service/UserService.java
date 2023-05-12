@@ -15,7 +15,7 @@ public class UserService extends BaseService<UserRepository, User> {
         super(repository, modelMapper);
     }
 
-    User findByUsername(String username) {
+    public User findByUsername(String username) {
         return repository.findByUsername(username);
     }
 }

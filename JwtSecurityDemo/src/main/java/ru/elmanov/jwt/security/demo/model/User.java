@@ -1,5 +1,6 @@
 package ru.elmanov.jwt.security.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -19,6 +20,7 @@ public class User extends BaseModel {
 
     @Column(name = "username", unique = true, nullable = false)
     String username;
+    @JsonIgnore
     @Column(name = "password", nullable = false)
     String password;
     @Builder.Default

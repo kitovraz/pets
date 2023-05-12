@@ -4,6 +4,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import ru.elmanov.jwt.security.demo.model.Role;
 import ru.elmanov.jwt.security.demo.model.User;
 import ru.elmanov.jwt.security.demo.service.RoleService;
@@ -19,7 +20,7 @@ public class JwtSecurityDemoApplication {
     }
 
     @Bean
-    CommandLineRunner init(UserService userService, RoleService roleService) {//, PasswordEncoder passwordEncoder) {
+    CommandLineRunner init(UserService userService, RoleService roleService, PasswordEncoder passwordEncoder) {
         return args -> {
             var roleUser = Role.builder().name("ROLE_USER").build();
             var roleAdmin = Role.builder().name("ROLE_ADMIN").build();
@@ -28,14 +29,14 @@ public class JwtSecurityDemoApplication {
 
             var user = User.builder()
                     .username("max")
-//                    .password(passwordEncoder.encode("123"))
-                    .password("123")
+                    .password(passwordEncoder.encode("123"))
+//                    .password("123")
                     .roles(List.of(roleUser))
                     .build();
             var admin = User.builder()
                     .username("nick")
-//                    .password(passwordEncoder.encode("qwe"))
-                    .password("qwe")
+                    .password(passwordEncoder.encode("qwe"))
+//                    .password("qwe")
                     .roles(List.of(roleUser, roleAdmin))
                     .build();
 

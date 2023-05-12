@@ -1,5 +1,6 @@
 package ru.elmanov.jwt.security.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Data;
