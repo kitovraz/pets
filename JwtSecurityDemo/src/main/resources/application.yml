@@ -42,3 +42,7 @@ log4j:
 jwt:
   secret: asdfghjhmgfdsadfg
   accessExpirationTimeMs: 120000
+
+#management:
+#  security:
+#    enabled: false

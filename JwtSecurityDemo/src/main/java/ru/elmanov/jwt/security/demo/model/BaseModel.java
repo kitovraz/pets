@@ -14,7 +14,7 @@ import java.time.LocalDate;
 
 @Data
 @MappedSuperclass
-@FieldDefaults(level = AccessLevel.PRIVATE)
+@FieldDefaults(level = AccessLevel.PROTECTED)
 @SuperBuilder
 @NoArgsConstructor
 public class BaseModel {

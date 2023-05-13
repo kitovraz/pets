@@ -17,7 +17,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class Role extends BaseModel{
+public class Role extends BaseModel {
 
     @Column(name = "name", unique = true, nullable = false)
     String name;

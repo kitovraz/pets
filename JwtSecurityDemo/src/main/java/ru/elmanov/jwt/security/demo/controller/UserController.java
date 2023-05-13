@@ -8,8 +8,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import ru.elmanov.jwt.security.demo.dto.request.UserRequestDto;
+import ru.elmanov.jwt.security.demo.dto.response.RoleResponseDto;
 import ru.elmanov.jwt.security.demo.dto.response.UserResponseDto;
 import ru.elmanov.jwt.security.demo.model.User;
+import ru.elmanov.jwt.security.demo.service.RoleService;
 import ru.elmanov.jwt.security.demo.service.UserService;
 
 import java.util.List;
@@ -23,23 +25,26 @@ import java.util.stream.Collectors;
 public class UserController {
 
     final UserService userService;
+    final RoleService roleService;
 
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     @GetMapping
     public List<UserResponseDto> getUsers() {
-//        return userService.serialise(userService.findAll(), UserResponseDto.class);
-        List<User> users = userService.findAll();
-        List<UserResponseDto> userResponseDtos = users.stream()
-                .map(user -> {
-                    UserResponseDto userResponseDto = new UserResponseDto();
-                    userResponseDto.setUsername(user.getUsername());
-                    userResponseDto.setPassword(user.getPassword());
-                    userResponseDto.setRoles(user.getRoles());
-                    return userResponseDto;
-                })
-                .collect(Collectors.toList());
-        return userResponseDtos;
+        return userService.serialise(userService.findAll(), UserResponseDto.class);
+//        List<User> users = userService.findAll();
+//        List<UserResponseDto> userResponseDtos = users.stream()
+//                .map(user -> {
+//                    UserResponseDto userResponseDto = new UserResponseDto();
+//                    userResponseDto.setUsername(user.getUsername());
+//                    userResponseDto.setPassword(user.getPassword());
+//                    userResponseDto.setRoles(user.getRoles());
+//                    return userResponseDto;
+//                })
+//                .collect(Collectors.toList());
+//        return userResponseDtos;
     }
 
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     @GetMapping("/{id}")
     public UserResponseDto getUser(@PathVariable Long id) {
 //        return userService.serialise(userService.findById(id), UserResponseDto.class);
@@ -48,16 +53,18 @@ public class UserController {
         UserResponseDto userResponseDto = new UserResponseDto();
         userResponseDto.setUsername(user.getUsername());
         userResponseDto.setPassword(user.getPassword());
-        userResponseDto.setRoles(user.getRoles());
+        userResponseDto.setRoles(roleService.serialise(user.getRoles(), RoleResponseDto.class));
         return userResponseDto;
     }
 
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     @PostMapping
     public User createUser(@RequestBody UserRequestDto dto) {
         var user = userService.deserialize(dto, User.class);
         return userService.save(user);
     }
 
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteUser(@PathVariable Long id) {
         var userToDelete = userService.findById(id);

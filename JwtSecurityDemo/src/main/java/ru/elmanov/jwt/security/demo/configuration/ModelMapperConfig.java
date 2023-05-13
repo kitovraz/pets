@@ -40,33 +40,33 @@ public class ModelMapperConfig {
         return modelMapper;
     }
 
-//    public static void main(String[] args) {
-//        ModelMapper modelmapper = new ModelMapper();
-//
-//        Provider<LocalDate> localDateProvider = new AbstractProvider<>() {
-//            @Override
-//            public LocalDate get() {
-//                return LocalDate.now();
-//            }
-//        };
-//
-//        Converter<String, LocalDate> toStringDate = new AbstractConverter<>() {
-//            @Override
-//            protected LocalDate convert(String source) {
-//                DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-//                LocalDate localDate = LocalDate.parse(source, format);
-//                return localDate;
-//            }
-//        };
-//
-//
-//        modelmapper.createTypeMap(String.class, LocalDate.class);
-//        modelmapper.addConverter(toStringDate);
-//        modelmapper.getTypeMap(String.class, LocalDate.class).setProvider(localDateProvider);
-//
-//        String dateTest = "2000-09-27";
-//        LocalDate dateConverted = modelmapper.map(dateTest, LocalDate.class);
-//
-//        System.out.println(dateConverted.toString());
-//    }
+    public static void main(String[] args) {
+        ModelMapper modelmapper = new ModelMapper();
+
+        Provider<LocalDate> localDateProvider = new AbstractProvider<>() {
+            @Override
+            public LocalDate get() {
+                return LocalDate.now();
+            }
+        };
+
+        Converter<String, LocalDate> toStringDate = new AbstractConverter<>() {
+            @Override
+            protected LocalDate convert(String source) {
+                DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                LocalDate localDate = LocalDate.parse(source, format);
+                return localDate;
+            }
+        };
+
+
+        modelmapper.createTypeMap(String.class, LocalDate.class);
+        modelmapper.addConverter(toStringDate);
+        modelmapper.getTypeMap(String.class, LocalDate.class).setProvider(localDateProvider);
+
+        String dateTest = "2000-09-27";
+        LocalDate dateConverted = modelmapper.map(dateTest, LocalDate.class);
+
+        System.out.println(dateConverted.toString());
+    }
 }
