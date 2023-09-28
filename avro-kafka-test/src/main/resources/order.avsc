@@ -1,0 +1,35 @@
+{
+  "type" : "record",
+  "name" : "OrderRequestDTO",
+  "namespace" : "ru.elmanov.avrokafkatest.api.rq",
+  "fields" : [ {
+    "name" : "delivery",
+    "type" : "boolean"
+  }, {
+    "name" : "id",
+    "type" : "int"
+  }, {
+    "name" : "name",
+    "type" : "string"
+  }, {
+    "name" : "price",
+    "type" : {
+      "type" : "string",
+      "java-class" : "java.math.BigDecimal"
+    }
+  }, {
+    "name" : "state",
+    "type" : {
+      "type" : "enum",
+      "name" : "State",
+      "symbols" : [ "CREATED", "PROCESSING", "FINISHED" ]
+    }
+  }, {
+    "name" : "tags",
+    "type" : {
+      "type" : ["null",",array"],
+      "items" : "string",
+      "java-class" : "java.util.Collection"
+    }
+  } ]
+}
