@@ -1,7 +1,7 @@
 {
   "type" : "record",
-  "name" : "OrderRequestDTO",
-  "namespace" : "ru.elmanov.avrokafkatest.api.rq",
+  "name" : "OrderAvro",
+  "namespace" : "ru.elmanov.avrokafkatest.api.rq.avro",
   "fields" : [ {
     "name" : "delivery",
     "type" : "boolean"
@@ -16,18 +16,21 @@
     "type" : {
       "type" : "string",
       "java-class" : "java.math.BigDecimal"
-    }
+    },
+    "precision": 6,
+    "scale": 2
   }, {
     "name" : "state",
     "type" : {
       "type" : "enum",
-      "name" : "State",
+      "name" : "StateAvro",
       "symbols" : [ "CREATED", "PROCESSING", "FINISHED" ]
-    }
+    },
+    "default": "CREATED"
   }, {
     "name" : "tags",
     "type" : {
-      "type" : ["null",",array"],
+      "type" : "array",
       "items" : "string",
       "java-class" : "java.util.Collection"
     }
