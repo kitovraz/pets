@@ -10,7 +10,8 @@
     "type" : "int"
   }, {
     "name" : "name",
-    "type" : "string"
+    "type": ["null", "string"],
+    "default": null
   }, {
     "name" : "price",
     "type" : {
@@ -29,10 +30,11 @@
     "default": "CREATED"
   }, {
     "name" : "tags",
-    "type" : {
-      "type" : "array",
-      "items" : "string",
+    "type": ["null", {
+      "type": "array",
+      "items": ["null", "string"],
       "java-class" : "java.util.Collection"
-    }
+    }],
+    "default": null
   } ]
 }

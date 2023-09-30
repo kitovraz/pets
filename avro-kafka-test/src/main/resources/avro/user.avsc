@@ -1,0 +1,59 @@
+{
+  "type": "record",
+  "name": "UserAvro",
+  "namespace": "ru.elmanov.avrokafkatest.api.rq.avro",
+  "fields": [{
+    "name": "id",
+    "type": "int"
+  }, {
+    "name": "name",
+    "type": ["null", "string"],
+    "default": null
+  }, {
+    "name": "orders",
+    "type": ["null", {
+      "type": "array",
+      "items": ["null", {
+        "type": "record",
+        "name": "OrderAvro",
+        "namespace" : "ru.elmanov.avrokafkatest.api.rq.avro",
+        "fields": [ {
+          "name" : "delivery",
+          "type" : "boolean"
+        }, {
+          "name" : "id",
+          "type" : "int"
+        }, {
+          "name" : "name",
+          "type": ["null", "string"],
+          "default": null
+        }, {
+          "name" : "price",
+          "type" : {
+            "type" : "string",
+            "java-class" : "java.math.BigDecimal"
+          },
+          "precision": 6,
+          "scale": 2
+        }, {
+          "name" : "state",
+          "type" : {
+            "type" : "enum",
+            "name" : "StateAvro",
+            "symbols" : [ "CREATED", "PROCESSING", "FINISHED" ]
+          },
+          "default": "CREATED"
+        }, {
+          "name" : "tags",
+          "type": ["null", {
+            "type": "array",
+            "items": ["null", "string"],
+            "java-class" : "java.util.Collection"
+          }],
+          "default": null
+        } ]
+      }]
+    }],
+    "default": null
+  }]
+}

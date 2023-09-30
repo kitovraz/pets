@@ -12,7 +12,7 @@ import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Service;
 import org.springframework.util.concurrent.ListenableFuture;
 import org.springframework.util.concurrent.ListenableFutureCallback;
-import ru.elmanov.avrokafkatest.api.rq.avro.OrderAvro;
+import ru.elmanov.avrokafkatest.api.rq.avro.UserAvro;
 
 import static lombok.AccessLevel.PRIVATE;
 
@@ -26,11 +26,11 @@ public class KafkaAvroService {
     @Value("${avro.topic.name}")
     String avroTopicName;
 
-    KafkaTemplate<String, OrderAvro> kafkaTemplate;
+    KafkaTemplate<String, UserAvro> userKafkaTemplate;
 
-    public void send(OrderAvro order) {
-        final var record = new ProducerRecord<String, OrderAvro>(avroTopicName, order);
-        ListenableFuture<SendResult<String, OrderAvro>> listenableFuture = kafkaTemplate.send(record);
+    public void sendUser(UserAvro user) {
+        final var record = new ProducerRecord<String, UserAvro>(avroTopicName, String.valueOf(user.getId()), user);
+        ListenableFuture<SendResult<String, UserAvro>> listenableFuture = userKafkaTemplate.send(record);
 
         listenableFuture.addCallback(new ListenableFutureCallback() {
 
