@@ -8,6 +8,10 @@ spring:
       value-serializer: "io.confluent.kafka.serializers.KafkaAvroSerializer"
       properties:
         schema.registry.url: "http://localhost:8081"
+        value:
+          subject:
+            name:
+              strategy: "io.confluent.kafka.serializers.subject.TopicRecordNameStrategy"
     consumer:
       key-deserializer: "org.apache.kafka.common.serialization.StringDeserializer"
       value-deserializer: "io.confluent.kafka.serializers.KafkaAvroDeserializer"
@@ -16,6 +20,10 @@ spring:
       properties:
         schema.registry.url: "http://localhost:8081"
         specific.avro.reader: true
+        value:
+          subject:
+            name:
+              strategy: "io.confluent.kafka.serializers.subject.TopicRecordNameStrategy"
 avro:
   topic:
     name: "avro-test-topic"

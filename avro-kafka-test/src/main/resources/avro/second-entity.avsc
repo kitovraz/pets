@@ -1,0 +1,15 @@
+{
+  "type" : "record",
+  "name" : "SecondEntityAvro",
+  "namespace" : "ru.elmanov.avrokafkatest.api.rq.avro",
+  "fields" : [ {
+    "name" : "id",
+    "type" : [ "null", {
+      "type" : "int",
+      "java-class" : "java.lang.Integer"
+    } ]
+  }, {
+    "name" : "name",
+    "type" : [ "null", "string" ]
+  } ]
+}

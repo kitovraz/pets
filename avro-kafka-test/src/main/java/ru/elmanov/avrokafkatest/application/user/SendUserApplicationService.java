@@ -1,4 +1,4 @@
-package ru.elmanov.avrokafkatest.application.order;
+package ru.elmanov.avrokafkatest.application.user;
 
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
