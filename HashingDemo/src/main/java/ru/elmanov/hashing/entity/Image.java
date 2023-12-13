@@ -28,4 +28,7 @@ public class Image {
     @Lob
     @Column(name = "content", nullable = false, columnDefinition = "BLOB")
     byte[] content;
+
+    @Column(name = "hash", nullable = false, columnDefinition = "text")
+    String hash;
 }
